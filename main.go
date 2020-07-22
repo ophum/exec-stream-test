@@ -7,7 +7,6 @@ import (
 	"io/ioutil"
 	"log"
 	"os/exec"
-	"time"
 
 	"github.com/gin-gonic/gin"
 )
@@ -23,8 +22,6 @@ func main() {
 
 		log.Println("start")
 		w := ctx.Writer
-		ticker := time.NewTicker(1 * time.Second)
-		defer ticker.Stop()
 
 		r := execTail()
 
@@ -41,16 +38,6 @@ func main() {
 
 			}
 		}()
-		//r := execTail()
-
-		//log.Println("start goroutine")
-		//buf := bufio.NewScanner(*r)
-		//for buf.Scan() {
-		//	w.Write([]byte(fmt.Sprintf("data: %s\n\n", buf.Text())))
-		//	w.Flush()
-
-		//}
-
 		<-ctx.Done()
 
 	})
